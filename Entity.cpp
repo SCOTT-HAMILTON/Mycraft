@@ -16,7 +16,6 @@ void Entity::update(){
   //std::cout << "Entity update!" << std::endl;
 }
 
-sf::Vector2f Entity::getPosition() const{
-  std::cout << "entity pos used !" << std::endl;
-  return pos;
+sf::Vector2f Entity::getMapPosition() const{
+  return map_pos;
 }

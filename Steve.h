@@ -4,15 +4,25 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
+#include "Map.h"
+#include <memory>
+
+struct SorterCollision{
+  float dist;
+  CollideData collision;
+};
 
 class Steve : public Entity
 {
 public:
-  Steve(const sf::Vector2f &pos = {0, 0});
+  Steve(const std::shared_ptr<Map> &map, const sf::Vector2f &window_pos = {0, 0});
   virtual ~Steve();
   virtual void draw(sf::RenderTarget &target);
   virtual void update();
-  virtual sf::Vector2f getPosition() const;
+  virtual sf::Vector2f getMapPosition() const;
+  virtual sf::Vector2f getWindowPosition() const;
+  bool isJumping();
+  bool blockUnderFeets();
 
   //Controls
   void setright(bool val);
@@ -22,17 +32,24 @@ public:
   void sword_down();
   void sword_up();
   void kick();
+  void setMapPos(const sf::Vector2f &pos);
+  void setWindowPos(const sf::Vector2f &pos);
+  void pose_block(const sf::Vector2f &mousepos);
+  sf::Vector2f pos_bloclooking();
+  void checkCollision(const sf::Vector2f &prec_pos, const sf::Vector2f &wanted_pos);
 
 protected:
   sf::Vector2f pos;
 
 private:
+  sf::Vector2f window_pos;
   bool right;
   bool left;
   bool jump;
   bool jumping;
   float jumpy;
   float vec_jump;
+  float vec_fall;
   float gravity;
   float arm_length;
   bool kicking;
@@ -49,6 +66,12 @@ private:
 
   sf::Clock jumpclock;
   sf::Clock kickclock;
+
+  std::shared_ptr<Map> map;
+
+  sf::FloatRect sprite_rect;
+
+  float block_posdist;
 
 };
 

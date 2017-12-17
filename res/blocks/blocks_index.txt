@@ -1,0 +1,10 @@
+durt.jpg:0
+grass.jpg:1
+stone.jpg:2
+lapis-lazuli.jpg:3
+gold.jpg:4
+emerald.jpg:5
+diamond.jpg:6
+coal.jpg:7
+yellow-woole.jpg:8
+blue-wool.jpg:9
